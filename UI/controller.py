@@ -41,26 +41,24 @@ class Controller:
 
     # CALLBACKS DROPDOWN
     # TODO
+    def callback_m(self,e):
+        self.museo_selezionato = self._view.dd_musei.value
+        if self.museo_selezionato == "Nessun filtro":
+            self.museo_selezionato = None
+
+    def callback_a(self,e):
+        self.epoca_selezionata = self._view.dd_epoca.value
+        if self.epoca_selezionata == "Nessun filtro":
+            self.epoca_selezionata = None
 
     # AZIONE: MOSTRA ARTEFATTI
     # TODO
     def mostra_artefatti(self,e):
-        self.museo_selezionato = self._view.dd_musei.value
-        self.epoca_selezionata = self._view.dd_epoca.value
         self._view.lw_artefatti.clean()
-        if self.museo_selezionato is None:
-            self._view.show_alert("Seleziona un museo")
-        if self.epoca_selezionata is None:
-            self._view.show_alert("Seleziona un epoca")
-        if self.epoca_selezionata is not None and self.epoca_selezionata is not None:
-            if self.museo_selezionato == "Nessun filtro":
-                self.museo_selezionato = None
-            if self.epoca_selezionata == "Nessun filtro":
-                self.epoca_selezionata = None
-            artefatti=self._model.get_artefatti_filtrati(self.museo_selezionato, self.epoca_selezionata)
-            if len(artefatti)==0:
-                self._view.show_alert("Nessun artefatto trovato")
-            else:
-                for a in artefatti:
-                    self._view.lw_artefatti.controls.append(ft.Text(a))
+        artefatti=self._model.get_artefatti_filtrati(self.museo_selezionato, self.epoca_selezionata)
+        if len(artefatti)==0:
+            self._view.show_alert("Nessun artefatto trovato")
+        else:
+            for a in artefatti:
+                self._view.lw_artefatti.controls.append(ft.Text(a))
         self._view.update()

@@ -40,11 +40,13 @@ class View:
         # --- Sezione 2: Filtraggio ---
         # TODO
         self.dd_musei=ft.Dropdown( label="Musei",
-                              options=self.controller.popola_dropdown_m(),
-                              width=400,)
+                                options=self.controller.popola_dropdown_m(),
+                                width=400,
+                                on_change=self.controller.callback_m)
         self.dd_epoca=ft.Dropdown( label="Epoca",
-                              options=self.controller.popola_dropdown_a(),
-                              width=200,)
+                                options=self.controller.popola_dropdown_a(),
+                                width=200,
+                                on_change=self.controller.callback_a)
         # Sezione 3: Artefatti
         # TODO
         btn_artefatti=ft.ElevatedButton(text="Mostra artefatti",on_click=self.controller.mostra_artefatti)
