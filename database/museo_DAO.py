@@ -11,3 +11,16 @@ class MuseoDAO:
         pass
 
     # TODO
+    def get_musei(self):
+        musei=[]
+        cnx=ConnessioneDB.get_connection()
+        cursor=cnx.cursor()
+        query="SELECT * FROM museo"
+        cursor.execute(query)
+        for row in cursor:
+            musei.append(Museo(row[0],row[1],row[2]))
+        cursor.close()
+        cnx.close()
+        return musei
+
+

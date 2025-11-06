@@ -1,4 +1,6 @@
 import flet as ft
+from httpx import options
+
 from UI.alert import AlertManager
 
 '''
@@ -37,10 +39,16 @@ class View:
 
         # --- Sezione 2: Filtraggio ---
         # TODO
-
+        self.dd_musei=ft.Dropdown( label="Musei",
+                              options=self.controller.popola_dropdown_m(),
+                              width=400,)
+        self.dd_epoca=ft.Dropdown( label="Epoca",
+                              options=self.controller.popola_dropdown_a(),
+                              width=200,)
         # Sezione 3: Artefatti
         # TODO
-
+        btn_artefatti=ft.ElevatedButton(text="Mostra artefatti",on_click=self.controller.mostra_artefatti)
+        self.lw_artefatti=ft.ListView(auto_scroll=True)
         # --- Toggle Tema ---
         self.toggle_cambia_tema = ft.Switch(label="Tema scuro", value=True, on_change=self.cambia_tema)
 
@@ -54,9 +62,13 @@ class View:
 
             # Sezione 2: Filtraggio
             # TODO
-
+            ft.Row(controls=[self.dd_musei, self.dd_epoca],
+                     alignment="center",),
+            ft.Divider(),
             # Sezione 3: Artefatti
             # TODO
+            btn_artefatti,
+            self.lw_artefatti,
         )
 
         self.page.scroll = "adaptive"
